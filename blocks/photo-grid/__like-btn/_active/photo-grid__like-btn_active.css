@@ -1,0 +1,17 @@
+.photo-grid__like-btn_active {
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../../images/like-btn-active.svg);
+    box-sizing: border-box;
+    border: none;
+    background-color: #FFFFFF;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-self: center;
+    cursor: pointer;
+  }
+  
+  .photo-grid__like-btn_active:hover {
+    opacity: .5;
+    transition: opacity linear .2s;
+  }

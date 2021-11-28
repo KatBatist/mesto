@@ -8,6 +8,7 @@
 
 @media screen and (max-width: 619px) {
   .profile {
+    max-width: 282px;
     padding: 42px 0 36px;  
     grid-template-columns: 1fr;
   }
@@ -15,8 +16,6 @@
 
 @media screen and (min-width: 620px) and (max-width: 933px) {
   .profile {
-    /*margin: 0 27px 0;  */
-    
     grid-template-columns: 1fr;
   }
 }
