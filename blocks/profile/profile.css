@@ -1,21 +1,18 @@
 .profile {
   max-width: 880px;
   margin: 0 auto;
-  padding: 40px 0 50px;
+  padding: 40px 0 0;
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: 120px 1fr 180px;
+  grid-template: auto / 120px 1fr 150px;
+  grid-column-gap: 30px;
+  align-items: center;
 }
 
-@media screen and (max-width: 619px) {
+@media screen and (max-width: 933px) {
   .profile {
-    max-width: 282px;
-    padding: 42px 0 36px;
     grid-template-columns: 1fr;
+    justify-items: center;
   }
 }
 
-@media screen and (min-width: 620px) and (max-width: 933px) {
-  .profile {
-    grid-template-columns: 1fr;
-  }
-}

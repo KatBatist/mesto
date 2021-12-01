@@ -9,9 +9,9 @@
     background-repeat: no-repeat;
     align-self: center;
     cursor: pointer;
+    transition: opacity linear .2s;
   }
   
   .photo-grid__like-btn_active:hover {
     opacity: .5;
-    transition: opacity linear .2s;
   }

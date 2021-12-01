@@ -12,59 +12,63 @@
   </header>
   <main>
     <section class="profile">
-      <img class="profile__avatar" src="images/profile-avatar.jpg" alt="">
+      <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Аватар.">
       <div class="profile__info">
-        <div class="profile__container">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-btn openForm"></button>
-        </div>
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__edit-btn" type="button"></button>
         <p class="profile__job">Исследователь океана</p>
       </div>
-      <button class="profile__add-btn"></button> 
+      <button class="profile__add-btn" type="button"></button> 
     </section>
 
     <section class="photos">
       <ul class="photo-grid">
         <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-karachaevsk.jpg" alt="">
+          <img class="photo-grid__image" src="./images/photo-grid-karachaevsk.jpg" 
+            alt="Шоанинский храм на склоне горы.">
           <div class="photo-grid__container">
             <p class="photo-grid__caption">Карачаевск</p>
-            <button class="photo-grid__like-btn"></button>         
+            <button class="photo-grid__like-btn" type="button"></button>         
           </div>
         </li>
         <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-elbrus.jpg" alt="">
+          <img class="photo-grid__image" src="./images/photo-grid-elbrus.jpg" 
+            alt="Водопад в ущелье горы.">
           <div class="photo-grid__container">
             <p class="photo-grid__caption">Гора Эльбрус</p>
-            <button class="photo-grid__like-btn"></button>         
+            <button class="photo-grid__like-btn" type="button"></button>         
           </div>
         </li>
         <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-dombay.jpg" alt="">
+          <img class="photo-grid__image" src="./images/photo-grid-dombay.jpg" 
+            alt="Скальная вершина горы, частично покрытая снегом и деревья на склоне горы.">
           <div class="photo-grid__container">
             <p class="photo-grid__caption">Домбай</p>
-            <button class="photo-grid__like-btn"></button>         
+            <button class="photo-grid__like-btn" type="button"></button>         
           </div>
         </li>
         <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-baikal.jpg" alt="">
+          <img class="photo-grid__image" src="./images/photo-grid-baikal.jpg" 
+            alt="Водная гладь озера и часть берега, заросшая травой и деревьями.">
           <div class="photo-grid__container">
             <p class="photo-grid__caption">Озеро Байкал</p>
-            <button class="photo-grid__like-btn"></button>         
+            <button class="photo-grid__like-btn" type="button"></button>         
           </div>
         </li>
         <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-kamchatka.jpg" alt="">
+          <img class="photo-grid__image" src="./images/photo-grid-kamchatka.jpg" 
+            alt="Сопка в легких облаках и лучах заходящего солнца.">
           <div class="photo-grid__container">
             <p class="photo-grid__caption">Камчатка</p>
-            <button class="photo-grid__like-btn"></button>         
+            <button class="photo-grid__like-btn" type="button"></button>         
           </div>
         </li>
         <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-karachaevo-ch.jpg" alt="">
+          <img class="photo-grid__image" src="./images/photo-grid-karachaevo-ch.jpg" 
+            alt="Пригорки и ущелья, покрытые травой и полевыми цветами.">
           <div class="photo-grid__container">
             <p class="photo-grid__caption">Карачаево-Черкесия</p>
-            <button class="photo-grid__like-btn"></button>         
+            <button class="photo-grid__like-btn" type="button"></button>         
           </div>
         </li>
       </ul>
@@ -76,13 +80,13 @@
   </footer>
   <div class="popup">
     <div class="popup__container">
-      <form class="form-edit">
-        <h2 class="form-edit__header">Редактировать профиль</h2>
-        <input class="form-edit__text" type="text" id="profile-name" placeholder="Имя">  
-        <input class="form-edit__text" type="text" id="profile-job" placeholder="Вид деятельности">
-        <button class="form-edit__save-btn saveForm">Сохранить</button>
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <form class="form-edit" name="editForm">
+        <input class="form-edit__text" type="text" id="profile-name" placeholder="Имя" name="inputName">  
+        <input class="form-edit__text" type="text" id="profile-job" placeholder="Вид деятельности" name="inputJob">
+        <button class="form-edit__save-btn" type="submit">Сохранить</button>
       </form>
-      <button class="popup__close-btn closeForm"></button>
+      <button class="popup__close-btn" type="button"></button>
     </div>
   </div>  
   <script src="scripts/script.js"></script>

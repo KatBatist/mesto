@@ -1,5 +1,5 @@
-.form-edit__header {
-  margin: 0 auto;
+.popup__header {
+  margin: 0;
   padding: 0 0 24px;
   font-size: 24px;
   line-height: 29px;
@@ -8,11 +8,10 @@
 }
   
 @media screen and (max-width: 619px) {
-  .form-edit__header {
+  .popup__header {
     padding: 0 0 45px;
     font-size: 18px;
     line-height: 22px;
-    font-weight: 900;
   }
 }
 
