@@ -1,4 +1,9 @@
 .photo-grid__image {
   width: 100%;
-  border-radius: 10px 10px 0px 0px;
+  height: 282px;
+  display: block;
+  object-fit: fill;
+  object-position: center;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
 }

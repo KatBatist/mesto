@@ -1,14 +1,14 @@
 .photo-grid__like-btn {
   width: 22px;
   height: 19px;
+  margin-right: 20px;
   padding: 0;
   background-image: url(../../../images/like-btn.svg);
-  box-sizing: border-box;
-  border: none;
-  background-color: #FFFFFF;
   background-position: center;
   background-repeat: no-repeat;
-  align-self: center;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  border: none;
   transition: opacity linear .2s;
 }
 

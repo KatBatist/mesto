@@ -1,7 +1,10 @@
 .photo-grid__container {
-  margin: 0;
-  padding: 0;
-  padding: 25px 15px 31px 21px;
+  width: 100%;
+  min-height: 79px;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  background-color: #FFFFFF;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }

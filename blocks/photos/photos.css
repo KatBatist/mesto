@@ -6,6 +6,7 @@
 
 @media screen and (max-width: 933px) {
     .photos {
-        padding: 36px 0 0;
+        max-width: 282px;
+        padding-top: 36px;
     }
   }
