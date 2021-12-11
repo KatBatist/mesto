@@ -20,75 +20,53 @@
       </div>
       <button class="profile__add-btn" type="button"></button> 
     </section>
-
-    <section class="photos">
-      <ul class="photo-grid">
-        <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-karachaevsk.jpg" 
-            alt="Шоанинский храм на склоне горы.">
-          <div class="photo-grid__container">
-            <p class="photo-grid__caption">Карачаевск</p>
-            <button class="photo-grid__like-btn" type="button"></button>    
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-elbrus.jpg" 
-            alt="Водопад в ущелье горы.">
-          <div class="photo-grid__container">
-            <p class="photo-grid__caption">Гора Эльбрус</p>
-            <button class="photo-grid__like-btn" type="button"></button>         
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-dombay.jpg" 
-            alt="Скальная вершина горы, частично покрытая снегом и деревья на склоне горы.">
-          <div class="photo-grid__container">
-            <p class="photo-grid__caption">Домбай</p>
-            <button class="photo-grid__like-btn" type="button"></button>         
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-baikal.jpg" 
-            alt="Водная гладь озера и часть берега, заросшая травой и деревьями.">
-          <div class="photo-grid__container">
-            <p class="photo-grid__caption">Озеро Байкал</p>
-            <button class="photo-grid__like-btn" type="button"></button>         
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-kamchatka.jpg" 
-            alt="Сопка в легких облаках и лучах заходящего солнца.">
-          <div class="photo-grid__container">
-            <p class="photo-grid__caption">Камчатка</p>
-            <button class="photo-grid__like-btn" type="button"></button>         
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__image" src="./images/photo-grid-karachaevo-ch.jpg" 
-            alt="Пригорки и ущелья, покрытые травой и полевыми цветами.">
-          <div class="photo-grid__container">
-            <p class="photo-grid__caption">Карачаево-Черкесия</p>
-            <button class="photo-grid__like-btn" type="button"></button>         
-          </div>
-        </li>
+    <section class="cards">
+      <ul class="cards__container">
       </ul>
     </section>
-
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020. Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup-edit">
     <div class="popup__container">
       <h2 class="popup__header">Редактировать профиль</h2>
-      <form class="form-edit" name="editForm">
-        <input class="form-edit__text" type="text" id="profile-name" placeholder="Имя" name="inputName">  
-        <input class="form-edit__text" type="text" id="profile-job" placeholder="Вид деятельности" name="inputJob">
-        <button class="form-edit__save-btn" type="submit">Сохранить</button>
+      <form class="form form-edit" name="form-edit">
+        <input class="form__text" type="text" id="profile-name" placeholder="Имя" name="inputName">  
+        <input class="form__text" type="text" id="profile-job" placeholder="Вид деятельности" name="inputJob">
+        <button class="form__save-btn" type="submit">Сохранить</button>
       </form>
-      <button class="popup__close-btn" type="button"></button>
+      <button class="popup__close-btn popup-edit-close" type="button"></button>
     </div>
-  </div>  
+  </div>   
+  <div class="popup popup-add">
+    <div class="popup__container">
+      <h2 class="popup__header">Новое место</h2>
+      <form class="form form-add" name="form-add">
+        <input class="form__text" type="text" id="card-name" placeholder="Название" name="inputCardName">  
+        <input class="form__text" type="text" id="card-link" placeholder="Ссылка на картинку" name="inputCardLink">
+        <button class="form__save-btn" type="submit">Создать</button>
+      </form> 
+      <button class="popup__close-btn popup-add-close" type="button"></button>
+    </div>
+  </div>     
+  <div class="popup popup-card">
+    <figure class="popup-card__figure">
+      <img class="popup-card__image" alt="">
+      <figcaption class="popup-card__caption"></figcaption>
+      <button class="popup__close-btn popup-card-close"></button>
+    </figure>
+  </div>
+  <template id="templateCard">
+    <li class="card">
+      <img class="card__image" alt="">
+      <button class="card__delete-btn"></button>
+      <div class="card__container">
+        <p class="card__caption"></p>
+        <button class="card__like-btn" type="button"></button>    
+      </div>
+    </li>
+  </template>
   <script src="scripts/script.js"></script>
 </body>
 </html>

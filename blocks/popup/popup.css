@@ -1,6 +1,7 @@
 .popup {
-  display: none;
+  visibility: hidden;
   opacity: 0;
+  transition: visibility .3s, opacity .3s linear;
 }
 
 .popup:before {
@@ -14,6 +15,3 @@
   opacity: .5;
   transition: opacity linear .2s;
 }
-
-
-
