@@ -3,27 +3,24 @@ const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
 const popupCard = document.querySelector('.popup-card');
 
-//open popup
-const openPopupEdit = document.querySelector('.profile__edit-btn');
-const openPopupAdd = document.querySelector('.profile__add-btn');
+//button
+const openEditBtn = document.querySelector('.profile__edit-btn');
+const openAddBtn = document.querySelector('.profile__add-btn');
+const closeEditBtn = document.querySelector('.popup-edit-close');
+const closeAddBtn = document.querySelector('.popup-add-close');
+const closeCardBtn = document.querySelector('.popup-card-close');
 
-//close popup
-const closePopupEdit = document.querySelector('.popup-edit-close');
-const closePopupAdd = document.querySelector('.popup-add-close');
-const closePopupCard = document.querySelector('.popup-card-close');
-
-//text for popup
+//text for input
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
-//const cardImgOld = document.querySelector('.card__image');
-const cardImgPopup = document.querySelector('.popup-card__image');
-const cardCaptionPopup = document.querySelector('.popup-card__caption');
+const cardImg = document.querySelector('.popup-card__image');
+const cardCaption = document.querySelector('.popup-card__caption');
 
-//text from popup
-const profileNamePopup = document.querySelector('input[id="profile-name"]');
-const profileJobPopup = document.querySelector('input[id="profile-job"]');
-const cardNamePopup = document.querySelector('input[id="card-name"]');
-const cardLinkPopup = document.querySelector('input[id="card-link"]');
+//text from input
+const profileNameInput = document.querySelector('input[id="profile-name"]');
+const profileJobInput = document.querySelector('input[id="profile-job"]');
+const cardNameInput = document.querySelector('input[id="card-name"]');
+const cardLinkInput = document.querySelector('input[id="card-link"]');
 
 //templateCard
 const templateCard = document.querySelector('#templateCard').content; 
@@ -60,85 +57,87 @@ const initialCards = [
     }
 ]
 
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+}
+
 function openEdit() {
-    profileNamePopup.value = profileName.textContent;
-    profileJobPopup.value = profileJob.textContent;
-    popupEdit.classList.add('popup_opened');    
+    profileNameInput.value = profileName.textContent;
+    profileJobInput.value = profileJob.textContent;
+    openPopup(popupEdit);
 }
 
 function openAdd() {
-    cardNamePopup.value = '';
-    cardLinkPopup.value = '';
-    popupAdd.classList.add('popup_opened');    
+    cardNameInput.value = '';
+    cardLinkInput.value = '';
+    openPopup(popupAdd);
 }
 
 function openCard() {
-    popupCard.classList.add('popup_opened');    
+    openPopup(popupCard);
 }
 
 function closeEdit() {
-     popupEdit.classList.remove('popup_opened');
+    closePopup(popupEdit);
 }
 
 function closeAdd() {
-    popupAdd.classList.remove('popup_opened');
+    closePopup(popupAdd);
 }
 
 function closeCard() {
-    popupCard.classList.remove('popup_opened');
+    closePopup(popupCard);
 }
 
-function formEditSubmitHandler (evt) {
+function handleEditFormSubmit (evt) {
     evt.preventDefault(); 
-    profileName.textContent = profileNamePopup.value;
-    profileJob.textContent = profileJobPopup.value;
+    profileName.textContent = profileNameInput.value;
+    profileJob.textContent = profileJobInput.value;
     closeEdit();
 }
 
-function formCardSubmitHandler (evt) {
-    evt.preventDefault(); 
-    closeCard();
-}
-
-function createCard(element, image, caption){
-    element.querySelector('.card__image').src = image;
-    element.querySelector('.card__caption').textContent = caption;
-    element.querySelector('.card__delete-btn').addEventListener('click', function (evt) {
+function createCard(image, caption){
+    const cardElement = templateCard.querySelector('.card').cloneNode(true);
+    const elementImg = cardElement.querySelector('.card__image');
+    elementImg.src = image;
+    elementImg.alt = caption;
+    cardElement.querySelector('.card__caption').textContent = caption;
+    cardElement.querySelector('.card__delete-btn').addEventListener('click', function (evt) {
         evt.currentTarget.closest('.card').remove();
     }); 
-    element.querySelector('.card__like-btn').addEventListener('click', function (evt) {
+    cardElement.querySelector('.card__like-btn').addEventListener('click', function (evt) {
         evt.target.classList.toggle('card__like-btn_active');
     }); 
-    element.querySelector('.card__image').addEventListener('click', function (evt) {
-        cardImgPopup.src = evt.currentTarget.src;
-        cardCaptionPopup.textContent = element.querySelector('.card__caption').textContent;
+    elementImg.addEventListener('click', function (evt) {
+        cardImg.src = image
+        cardImg.alt = caption
+        cardCaption.textContent = caption
         openCard();
     });
+    return cardElement;
 }
 
-function formAddSubmitHandler (evt) {
+function handleAddFormSubmit (evt) {
     evt.preventDefault(); 
-    const userElement = templateCard.querySelector('.card').cloneNode(true);
-    createCard(userElement, cardLinkPopup.value, cardNamePopup.value);
-    cards.prepend(userElement); 
+    cards.prepend(createCard(cardLinkInput.value, cardNameInput.value)); 
     closeAdd();
 }
 
 initialCards.forEach(item => {
-    const userElement = templateCard.querySelector('.card').cloneNode(true);
-    console.log(item.link, item.name)
-    createCard(userElement, item.link, item.name);
-    cards.append(userElement); 
+    cards.append(createCard(item.link, item.name)); 
 });
 
-openPopupEdit.addEventListener('click', openEdit);
-openPopupAdd.addEventListener('click', openAdd);
+openEditBtn.addEventListener('click', openEdit);
+openAddBtn.addEventListener('click', openAdd);
+closeEditBtn.addEventListener('click', closeEdit);
+closeAddBtn.addEventListener('click', closeAdd);
+closeCardBtn.addEventListener('click', closeCard);
 
-closePopupEdit.addEventListener('click', closeEdit);
-closePopupAdd.addEventListener('click', closeAdd);
-closePopupCard.addEventListener('click', closeCard);
-
-formEdit.addEventListener('submit', formEditSubmitHandler); 
-formAdd.addEventListener('submit', formAddSubmitHandler);
+formEdit.addEventListener('submit', handleEditFormSubmit); 
+formAdd.addEventListener('submit', handleAddFormSubmit);
 
 
