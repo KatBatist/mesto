@@ -69,12 +69,14 @@ function openEdit() {
     profileNameInput.value = profileName.textContent;
     profileJobInput.value = profileJob.textContent;
     openPopup(popupEdit);
+    clearValidation();
 }
 
 function openAdd() {
     cardNameInput.value = '';
     cardLinkInput.value = '';
     openPopup(popupAdd);
+    clearValidation();
 }
 
 function openCard() {
@@ -140,4 +142,31 @@ closeCardBtn.addEventListener('click', closeCard);
 formEdit.addEventListener('submit', handleEditFormSubmit); 
 formAdd.addEventListener('submit', handleAddFormSubmit);
 
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeEdit();
+        closeAdd();
+        closeCard();
+    }
+});
 
+document.addEventListener('click', function(e) {
+    if (e.target == popupEdit) {
+        closeEdit();
+    }
+    if (e.target == popupAdd) {
+        closeAdd();
+    }
+    if (e.target == popupCard) {
+        closeCard();
+    }
+  })
+
+  enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__submit',
+    inactiveButtonClass: 'form__submit_inactive',
+    inputErrorClass: 'form__input-type-error',
+    errorClass: 'form__input-error_active'
+}); 
