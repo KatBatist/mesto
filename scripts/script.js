@@ -66,7 +66,7 @@ const initialValidation = {
     errorClass: 'form__input-error_active'
 }; 
 
-doSomething = (e) => {
+const handleClosePopup = (e) => {
     if (e.key === 'Escape') { 
         closePopup(document.querySelector('.popup_opened'));
     }
@@ -74,12 +74,12 @@ doSomething = (e) => {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', doSomething);
+    document.addEventListener('keydown', handleClosePopup);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', doSomething);
+    document.removeEventListener('keydown', handleClosePopup);
 }
 
 function openEdit() {
@@ -107,12 +107,12 @@ function handleEditFormSubmit (evt) {
     closePopup(popupEdit);
 }
 
-function createCard(cardDate){    
+function createCard(cardData){    
     const cardElement = templateCard.querySelector('.card').cloneNode(true);
     const elementImg = cardElement.querySelector('.card__image');
-    elementImg.src = cardDate[0];
-    elementImg.alt = cardDate[1];
-    cardElement.querySelector('.card__caption').textContent = cardDate[1];
+    elementImg.src = cardData.link;
+    elementImg.alt = cardData.name;
+    cardElement.querySelector('.card__caption').textContent = cardData.name;
     cardElement.querySelector('.card__delete-btn').addEventListener('click', function (evt) {
         evt.currentTarget.closest('.card').remove();
     }); 
@@ -120,9 +120,9 @@ function createCard(cardDate){
         evt.target.classList.toggle('card__like-btn_active');
     }); 
     elementImg.addEventListener('click', function (evt) {
-        cardImg.src = cardDate[0]
-        cardImg.alt = cardDate[1]
-        cardCaption.textContent = cardDate[1]
+        cardImg.src = cardData.link;
+        cardImg.alt = cardData.name;
+        cardCaption.textContent = cardData.name;
         openCard();
     });
     return cardElement;
@@ -130,14 +130,13 @@ function createCard(cardDate){
 
 function handleAddFormSubmit (evt) {
     evt.preventDefault(); 
-    let cardDate = [cardLinkInput.value, cardNameInput.value];
-    cards.prepend(createCard(cardDate));
+    const cardData = {name: cardNameInput.value, link: cardLinkInput.value}
+    cards.prepend(createCard(cardData));
     closePopup(popupAdd);
 }
 
 initialCards.forEach(item => {
-    let cardDate = [item.link, item.name];
-    cards.append(createCard(cardDate));
+    cards.append(createCard(item));
 });
 
 openEditBtn.addEventListener('click', openEdit);
