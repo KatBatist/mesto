@@ -1,7 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator} from './FormValidator.js'
 import { initialCards } from './initialCards.js'
-import { openPopup, closePopup } from '../utils/utils.js'
 
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
@@ -35,6 +34,22 @@ const initialFormValidator = {
     errorClass: 'form__input-error_active'
 }; 
 
+const handleClosePopup = (e) => {
+    if (e.key === 'Escape') { 
+        closePopup(document.querySelector('.popup_opened'));
+    }
+}
+
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', handleClosePopup);
+}
+
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', handleClosePopup);
+}
+
 function openEdit() {
     profileNameInput.value = profileName.textContent;
     profileJobInput.value = profileJob.textContent;
@@ -56,7 +71,13 @@ function handleEditFormSubmit (evt) {
 }
 
 function createCard(cardData){    
-    const card = new Card('#templateCard', cardData, cardForm, cardImage, cardCaption); 
+    const handleOpenClick = () => {
+        cardImage.src = cardData.link;
+        cardImage.alt = cardData.name;
+        cardCaption.textContent = cardData.name;
+        openPopup(cardForm);
+    }
+    const card = new Card('#templateCard', cardData, cardForm, handleOpenClick);
     const cardElement = card.generateCard();
     
     return cardElement;

@@ -1,12 +1,11 @@
-import { openPopup } from '../utils/utils.js'
+//import { openPopup } from '../utils/utils.js'
 
 export class Card {
-    constructor(cardSelector, data, cardForm, cardImage, cardCaption) {    
+    constructor(cardSelector, data, cardForm, handleOpenClick) {        
         this._cardSelector = cardSelector;
         this._data = data;
         this._cardForm = cardForm;
-        this._cardImage = cardImage;
-        this._cardCaption = cardCaption;
+        this._handleOpenClick = handleOpenClick;
     }
 
     _getTemplate() {    
@@ -32,13 +31,6 @@ export class Card {
 
     _handleLikeClick() {
         this._element.querySelector('.card__like-btn').classList.toggle('card__like-btn_active');
-    }
-    
-    _handleOpenClick() {
-        this._cardImage.src = this._data.link;
-        this._cardImage.alt = this._data.name;
-        this._cardCaption.textContent = this._data.name;
-        openPopup(this._cardForm);
     }
       
     generateCard() {
