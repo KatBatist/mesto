@@ -1,10 +1,12 @@
-import { openPopup } from './index.js';
+import { openPopup } from '../utils/utils.js'
 
 export class Card {
-    constructor(cardSelector, data, form) {    
+    constructor(cardSelector, data, cardForm, cardImage, cardCaption) {    
         this._cardSelector = cardSelector;
         this._data = data;
-        this._form = form;
+        this._cardForm = cardForm;
+        this._cardImage = cardImage;
+        this._cardCaption = cardCaption;
     }
 
     _getTemplate() {    
@@ -33,17 +35,18 @@ export class Card {
     }
     
     _handleOpenClick() {
-        document.querySelector('.popup-card__image').src = this._data.link;
-        document.querySelector('.popup-card__image').alt = this._data.name;
-        document.querySelector('.popup-card__caption').textContent = this._data.name;
-        openPopup(this._form);
+        this._cardImage.src = this._data.link;
+        this._cardImage.alt = this._data.name;
+        this._cardCaption.textContent = this._data.name;
+        openPopup(this._cardForm);
     }
       
     generateCard() {
         this._element = this._getTemplate();
         
-        this._element.querySelector('.card__image').src = this._data.link;
-        this._element.querySelector('.card__image').alt = this._data.name;
+        this._image = this._element.querySelector('.card__image');
+        this._image.src = this._data.link;
+        this._image.alt = this._data.name;
 
         this._element.querySelector('.card__caption').textContent = this._data.name;
         this._setEventListeners();
