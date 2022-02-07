@@ -1,8 +1,7 @@
 export class Card {
-    constructor(cardSelector, data, cardForm, handleOpenClick) {        
+    constructor( {cardSelector, cardItem, handleOpenClick} ) {        
         this._cardSelector = cardSelector;
-        this._data = data;
-        this._cardForm = cardForm;
+        this._cardItem = cardItem;
         this._handleOpenClick = handleOpenClick;
     }
 
@@ -35,10 +34,10 @@ export class Card {
         this._element = this._getTemplate();
         
         this._image = this._element.querySelector('.card__image');
-        this._image.src = this._data.link;
-        this._image.alt = this._data.name;
+        this._image.src = this._cardItem.link;
+        this._image.alt = this._cardItem.name;
 
-        this._element.querySelector('.card__caption').textContent = this._data.name;
+        this._element.querySelector('.card__caption').textContent = this._cardItem.name;
         this._setEventListeners();
         
         return this._element;

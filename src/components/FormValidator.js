@@ -1,7 +1,7 @@
 export class FormValidator {
     constructor(validationConfig, form) {    
         this._validationConfig = validationConfig;
-        this._form = form;
+        this._form = document.querySelector(form);
     }
 
     _showInputError (inputElement, errorMessage) {
