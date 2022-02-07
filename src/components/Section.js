@@ -11,15 +11,12 @@ export class Section {
         });
     }
 
-    renderItem() {
-        this._renderer(this._items); 
-    }
-
     addItem(element) {
-       this._container.append(element);
+        this._container.append(element);
     }  
 
     addBeginItem(element) {
-      this._container.prepend(element);
-    } 
+        this._container.prepend(element);
+    }  
 }
+

@@ -18,12 +18,13 @@ export class Card {
             this._handleLikeClick();
         }); 
         this._element.querySelector('.card__image').addEventListener('click', () => {
-            this._handleOpenClick();
+            this._handleOpenClick(this._cardItem);
         });
       }
 
     _handleDeleteClick() {
-        this._element.querySelector('.card__delete-btn').closest('.card').remove();
+        this._element.remove();
+        this._element = null;
     }
 
     _handleLikeClick() {
