@@ -8,6 +8,7 @@ import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
+import { FormValidator} from '../components/FormValidator.js'
 
 const popupCard = new PopupWithImage({
     popupSelector: popupCardSelector, 
@@ -35,6 +36,7 @@ function openEdit() {
     profileNameInput.value = userInfo.name; 
     profileJobInput.value = userInfo.job;
     popupEdit.open();
+    formEditValidation.clearValidation();
 }
 
 const handleOpenClick = (cardItem) => {
@@ -65,6 +67,7 @@ const popupAdd = new PopupWithForm({
 function openAdd() {
     form.reset();
     popupAdd.open();
+    formAddValidation.clearValidation();
 }
 
 const cardsList = new Section({
@@ -84,3 +87,8 @@ openAddBtn.addEventListener('click', openAdd);
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
 popupCard.setEventListeners();
+
+const formEditValidation = new FormValidator(formEditSelector);  
+formEditValidation.enableValidation();
+const formAddValidation = new FormValidator(formAddSelector);
+formAddValidation.enableValidation();

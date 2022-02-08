@@ -1,5 +1,4 @@
 import { Popup } from './Popup.js';
-import { FormValidator} from '../components/FormValidator.js'
 import { formInput } from '../utils/constants.js'
 export class PopupWithForm extends Popup {
     constructor( {popupSelector, formSelector, handleSubmit} ) {
@@ -7,8 +6,6 @@ export class PopupWithForm extends Popup {
         this._handleSubmit = handleSubmit;
         this._formSelector = formSelector;
         this._formPopup = document.querySelector(formSelector)
-        this._formValidation = new FormValidator(formSelector); 
-        this._formValidation.enableValidation();
     }
     
     _getInputValues() {
@@ -27,11 +24,6 @@ export class PopupWithForm extends Popup {
             this._handleSubmit(this._getInputValues());
         });
     } 
-
-    open() {
-        super.open();
-        this._formValidation.clearValidation();
-    }
 
     close() {
         super.close();
