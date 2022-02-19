@@ -14,8 +14,6 @@ export class PopupWithForm extends Popup {
         inputElements.forEach((inputElement) => {
             inputValues[inputElement.name] = inputElement.value;
         });
-        inputValues['element'] = this._element;
-        inputValues['cardId'] = this._cardId;
         return inputValues;
     }
 
@@ -30,11 +28,5 @@ export class PopupWithForm extends Popup {
     close() {
         super.close();
         this._formPopup.reset();
-    }
-
-    open(element, cardId) {
-        super.open();
-        this._element = element;
-        this._cardId = cardId;
     }
 }

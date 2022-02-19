@@ -10,6 +10,7 @@ import { formAvatarEditSelector, formEditSelector, formAddSelector, formDeleteSe
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator} from '../components/FormValidator.js'
 import { Api } from '../components/Api.js';
@@ -21,16 +22,6 @@ const api = new Api({
       'Content-Type': 'application/json'
     }
 }); 
-
-let _idUser = 0;
-
-api.getUserInfo()
-.then((result) => {
-    profileName.textContent = result.name;
-    profileJob.textContent = result.about;
-    profileAvatar.src = result.avatar;
-    _idUser = result._id;
-})
 
 const userInfo = new UserInfo({
     profileNameSelector: profileName, 
@@ -44,20 +35,20 @@ const popupCard = new PopupWithImage({
     cardCaptionSelector: cardCaptionSelector
 });
 
-function handleDeleteSubmit(inputValues) {
-    api.setDeleteCard(inputValues.cardId)
+function handleDeleteSubmit(element, cardId) {
+    api.setDeleteCard(cardId)
     .then((result) => {
-        inputValues.element.remove();
-        inputValues.element = null;
+        element.remove();
+        element = null;
+        popupDelete.close();
     })
     .catch((err) => {
         console.log(err);
-    });
-    popupDelete.close();
+    })
+    .finally(() => {});
 }
-const popupDelete = new PopupWithForm({
+const popupDelete = new PopupWithConfirm({
     popupSelector: popupDeleteSelector,
-    formSelector: formDeleteSelector,
     handleSubmit: handleDeleteSubmit
 });
 
@@ -76,7 +67,8 @@ const handleLikeClick = (element, cardId) => {
         })
         .catch((err) => {
             console.log(err);
-        });  
+        })
+        .finally(() => {});   
     }
     else {
         api.setLike(cardId, false)
@@ -86,7 +78,8 @@ const handleLikeClick = (element, cardId) => {
         })
         .catch((err) => {
             console.log(err);
-        }); 
+        })
+        .finally(() => {});  
     }
 }
 function createCard(cardItem) { 
@@ -103,9 +96,15 @@ function createCard(cardItem) {
 
 let initialCards = [];
 let cardsList;
-api.getInitialCards()
-.then((result) => {
-    result.forEach((res) => {
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([userData, cards]) => {
+    profileName.textContent = userData.name;
+    profileJob.textContent = userData.about;
+    profileAvatar.src = userData.avatar;
+    const _idUser = userData._id;
+
+    cards.forEach((res) => {
         const isDeleteEnable = res.owner._id === _idUser;
         const isLike = res.likes.find(item => item._id == _idUser) != undefined;
         initialCards.push({
@@ -116,7 +115,7 @@ api.getInitialCards()
             isLike: isLike,
             _id: res._id    
         });
-    });
+    })
     cardsList = new Section({
         items: initialCards,
         renderer: (cardItem) => { 
@@ -128,19 +127,22 @@ api.getInitialCards()
 })
 .catch((err) => {
     console.log(err);
-});
+})
+.finally(() => {}); 
 
 function handleAvatarEditSubmit(inputValues, evt) {
     evt.submitter.textContent = "Сохранить...";
     api.setAvatar(inputValues.inputAvatar)
     .then((result) => {
         userInfo.setAvatar(result.avatar);
+        popupAvatarEdit.close();
     })
     .catch((err) => {
         console.log(err);
+    })
+    .finally(() => {
+        evt.submitter.textContent = "Сохранить";
     });
-    evt.submitter.textContent = "Сохранить";
-    popupAvatarEdit.close();
 }
 const popupAvatarEdit = new PopupWithForm({
     popupSelector: popupAvatarEditSelector,
@@ -152,14 +154,15 @@ function handleEditSubmit(inputValues, evt) {
     evt.submitter.textContent = "Сохранить...";
     api.setProfileInfo(inputValues.inputName, inputValues.inputJob)
     .then((result) => {
-        console.log(result)
         userInfo.setUserInfo(result.name, result.about);
+        popupEdit.close();
     })
     .catch((err) => {
         console.log(err);
+    })
+    .finally(() => {
+        evt.submitter.textContent = "Сохранить";
     });
-    evt.submitter.textContent = "Сохранить";
-    popupEdit.close();
 }
 const popupEdit = new PopupWithForm({
     popupSelector: popupEditSelector,
@@ -181,12 +184,14 @@ function handleAddSubmit(inputValues, evt) {
         } 
         const cardElement = createCard(cardItem);
         cardsList.addBeginItem(cardElement);
+        popupAdd.close();
     })
     .catch((err) => {
         console.log(err);
+    })
+    .finally(() => {
+        evt.submitter.textContent = "Создать";
     });
-    evt.submitter.textContent = "Создать";
-    popupAdd.close();
 }
 const popupAdd = new PopupWithForm({
     popupSelector: popupAddSelector,
