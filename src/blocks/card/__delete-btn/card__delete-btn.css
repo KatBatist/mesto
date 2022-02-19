@@ -1,4 +1,5 @@
 .card__delete-btn {
+  visibility: hidden;
   width: 18px;
   height: 19px;
   padding: 0;
